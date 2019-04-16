@@ -1,0 +1,29 @@
+{
+    "name": "command-line-jira",
+    "version": "0.0.1",
+    "description": "A command line client for Atlassian Jira",
+    "author": "Sebastian Skjoenberg Andersen",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/skjoenberg/command-line-jira"
+    },
+    "main": "lib/index.js",
+    "files": [
+      "lib"
+    ],
+    "bin": {
+      "jira": "./lib/index.js"
+    },
+    "scripts": {
+      "build": "",
+      "dev": "watch \"npm run build\" src"
+    },
+    "dependencies": {
+      "jira-client": "^4.2.0"
+    },
+    "devDependencies": {
+      "watch": "^1.0.2"
+    }
+  }
+  
