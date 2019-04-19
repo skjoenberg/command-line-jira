@@ -1,6 +1,8 @@
-from jiraConnectionHandler import JiraConnectionHandler
-from loginHandler import LoginHandler
+from jira_connection_manager import JiraConnectionHandler
+from login_manager import LoginManager
+from config_manager import ConfigManager
 
-loginHandler = LoginHandler("")
-jch = JiraConnectionHandler(loginHandler) 
-jch.getIssue()
+config_manager = ConfigManager()
+loginHandler = LoginManager(config_manager.get_username())
+jch = JiraConnectionHandler(loginHandler)
+jch.get_issue()
