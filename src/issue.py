@@ -1,4 +1,4 @@
-from command_line_utilities import read_from_console, write_to_console
+from CommandLineHandling.command_line_utilities import write_to_console
 from termcolor import colored
 
 class Issue:

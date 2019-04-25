@@ -1,5 +1,6 @@
 from getpass import getpass
 from typing import Callable
+import sys
 
 
 def write_to_console(message: str) -> None:
@@ -23,3 +24,7 @@ def require_password_from_input() -> str:
     write_to_console("Enter password:")
     password: str = require_input("No password entered, please enter password:", getpass)
     return password
+
+
+def get_command_line_arguments():
+    return sys.argv

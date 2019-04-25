@@ -1,7 +1,7 @@
 from jira import JIRA
 from issue import Issue
 from login_manager import LoginManager
-from command_line_utilities import write_to_console
+from CommandLineHandling.command_line_utilities import write_to_console
 from typing import Optional
 
 
