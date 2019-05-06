@@ -1,24 +1,9 @@
-from typing import Optional
+import argparse
 
 
-class ArgumentStackIsEmpty(Exception):
-    pass
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Command line interface for JIRA.')
+    parser.add_argument('-b', '--board', metavar='Board', nargs='1', help='The relevant board')
 
-
-class ArgumentStack:
-    def __init__(self, arguments: [str]):
-        self._arguments: [str] = arguments
-
-    def _is_empty(self):
-        return len(self._arguments) > 0
-
-    def next(self) -> Optional[str]:
-        if self._is_empty():
-            return None
-        else:
-            return self._arguments[0]
-
-    def pop(self):
-        if self._is_empty():
-            raise ArgumentStackIsEmpty()
-        return self._arguments.pop()
+    args = parser.parse_args()
+    print(args.accumulate(args.integers))

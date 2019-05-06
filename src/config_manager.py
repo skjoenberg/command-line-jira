@@ -56,7 +56,7 @@ class ConfigManager:
     def _translate_json_to_config(json_string):
         try:
             json_dict = json.loads(json_string)[0]
-            return json_dict["username"], json_dict["default_board"], json_dict["servert git "]
+            return json_dict["username"], json_dict["default_board"], json_dict["server"]
         except:
             pass
 
