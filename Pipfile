@@ -9,6 +9,8 @@ verify_ssl = true
 jiraclient = ">=2.1.9"
 keyring = ">=19.0.1"
 termcolor = "*"
+jira = "*"
+http-parser = "*"
 
 [requires]
 python_version = "3.7"
