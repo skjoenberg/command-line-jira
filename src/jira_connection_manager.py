@@ -61,3 +61,6 @@ class JiraConnectionHandler:
 
     def get_estimated_work_left_in_sprint(self, board_id: int, sprint_id: int) -> int:
         return self._jira_greenhopper.incompletedIssuesEstimateSum(board_id, sprint_id)
+
+    def get_transitions(self, issue: JiraIssue):
+        return self._jira_agile.transitions(issue)

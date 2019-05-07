@@ -7,7 +7,6 @@ class LoginManager:
     def __init__(self, username: str):
         self._username = username
         self._password = None
-
         self._resolve_password()
 
     def _resolve_password(self):

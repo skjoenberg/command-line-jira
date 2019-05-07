@@ -59,6 +59,9 @@ class JiraCommandManager:
     def get_sprints(self, board: Board):
         return self._connection_handler.get_sprints(board.id)
 
+    def get_transitions(self, issue: Issue):
+        return self._connection_handler.get_transitions(issue.issue)
+
     def get_active_sprint(self, board: Board):
         return Sprint(self._connection_handler.get_sprints(board.id, "active").pop(), board)
 
