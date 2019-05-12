@@ -1,6 +1,6 @@
 from JiraDataObjects.board import Board
 from JiraDataObjects.sprint import Sprint
-from config_manager import ConfigManager
+from Config.config_manager import ConfigManager
 from jira_connection_manager import JiraConnectionHandler
 from JiraDataObjects.issue import Issue
 from typing import Optional

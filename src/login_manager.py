@@ -1,6 +1,6 @@
 import keyring
 from constants import Constants
-from CommandLineHandling.command_line_utilities import require_password_from_input
+from CommandLine.command_line_utilities import require_password_from_input
 
 
 class LoginManager:

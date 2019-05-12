@@ -1,7 +1,7 @@
 from constants import Constants
-from config import Config
+from Config.config import Config
 from typing import Optional
-from CommandLineHandling.command_line_utilities import require_input, write_to_console
+from CommandLine.command_line_utilities import require_input, write_to_console
 import json
 
 home = str()

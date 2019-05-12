@@ -1,6 +1,4 @@
 from jira import Issue
-
-from CommandLineHandling.command_line_utilities import write_to_console
 from termcolor import colored
 
 
@@ -20,7 +18,7 @@ class Issue:
     def pprint(self):
         title = self.issue.fields.summary
         ba = colored(" > ", 'blue')
-        write_to_console("{:^80}".format(colored(title, 'green')))
-        write_to_console(
-            "{:^80}".format(self.issue.fields.issuetype.name + ba + self.get_status() + ba + ','.join(self.issue.fields.labels)))
-        write_to_console("{:^80}".format('Remaining: ' + str(self.get_remaining_estimate())))
+        titleLine = "{:^80}".format(colored(title, 'green'))
+        generalInfoLine = "{:^80}".format(self.issue.fields.issuetype.name + ba + self.get_status() + ba + ','.join(self.issue.fields.labels))
+        remainingLine = "{:^80}".format('Remaining: ' + str(self.get_remaining_estimate()))
+        return "\n".join([titleLine, generalInfoLine, remainingLine])
