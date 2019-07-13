@@ -44,9 +44,23 @@ def _add_issue_subparser(subparsers: _SubParsersAction) -> _SubParsersAction:
     """Creates a subparser for interacting with issues"""
 
     issue_parser = subparsers.add_parser("issue", aliases=['i'], help="Jira issue")
+
     issue_parser.add_argument('id', metavar='ID', help='Identifier of the object (Eg. ISSUE-189)')
+    issue_parser.add_subparsers(help="log_work") | _add_log_work_subparser
+
     issue_parser.add_argument('-s', '--status', action='store_true', help='Gets the current status')
+
     issue_parser.set_defaults(type='issue')
+    return subparsers
+
+
+@Pipe
+def _add_log_work_subparser(subparsers: _SubParsersAction):
+    """Creates a subparser for logging work"""
+    log_work_parser = subparsers.add_parser("log-work", aliases=["lw"], help="Log workz")
+    log_work_parser.add_argument('minutes', metavar="MINUTES", help='Minutes of work to log')
+
+    log_work_parser.set_defaults(log_work=True)
     return subparsers
 
 

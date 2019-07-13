@@ -1,3 +1,5 @@
+import string
+
 from jira import JIRA, Issue as JiraIssue
 
 from Config.config_manager import ConfigManager
@@ -72,3 +74,6 @@ class JiraConnectionHandler:
 
     def get_transitions(self, issue: JiraIssue):
         return self._jira_agile.transitions(issue)
+
+    def log_work(self, username: string, issue: JiraIssue, minutes_spent: int):
+        self._jira_agile.add_worklog(issue.key,timeSpent=str(minutes_spent) + "m", user=username)

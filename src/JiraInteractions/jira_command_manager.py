@@ -83,3 +83,7 @@ class JiraCommandManager:
     def estimated_work_left_in_sprint(self, sprint: Sprint):
         """Gets the estimated amount of work left in the sprint"""
         return self._connection_handler.get_estimated_work_left_in_sprint(sprint.board.id, sprint.id)
+
+    def log_work(self, issue: Issue, minutes_spent: int) -> None:
+        """Logs work on an issue"""
+        self._connection_handler.log_work(self._config_manager.username, issue.issue, minutes_spent)

@@ -10,6 +10,10 @@ class Issue:
         self._issue = jira_issue
 
     @property
+    def issue(self) -> Issue:
+        return self._issue
+
+    @property
     def status(self) -> string:
         return str(self._issue.fields.status)
 

@@ -4,6 +4,7 @@ from pipe import Pipe
 
 from CommandLine.command_line_input import CommandLineInput
 from Commands import Status
+from Commands.LogWork import LogWork
 
 
 @Pipe
@@ -18,5 +19,12 @@ def create_command(args: Namespace):
             return Status
     except:
         pass
+
+    try:
+        if args.log_work:
+            return LogWork(args.minutes)
+    except:
+        pass
+
     return Status
 
