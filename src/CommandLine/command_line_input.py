@@ -1,16 +1,23 @@
-from typing import Optional
+import string
 
-from JiraDataObjects.board import Board
-from JiraDataObjects.issue import Issue
+from Commands import ICommand
 
 
-class CommandLineInput():
-    def __init__(self):
-        self.issue: Optional[Issue] = None
-        self.board: Optional[Board] = None
+class CommandLineInput:
+    def __init__(self, type: string, id: string, command: ICommand):
+        """Read-only dto for command line input"""
+        self._id = id
+        self._type = type
+        self._command = command
 
-    def set_issue(self, issue: Issue):
-        self.issue = issue
+    @property
+    def id(self):
+        return self._id
 
-    def set_board(self, board: Board):
-        self.board = board
+    @property
+    def type(self):
+        return self._type
+
+    @property
+    def command(self):
+        return self._command

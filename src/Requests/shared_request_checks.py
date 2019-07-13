@@ -1,12 +1,12 @@
-def is_issue(args):
-    try:
-        return args.type in ['i', 'issue'] and args.id
-    except:
-        return False
+from CommandLine.command_line_input import CommandLineInput
+from Commands.Status import Status
 
 
-def has_status_flag(args):
-    try:
-        return args.status
-    except:
-        return False
+def is_issue(command_line_input: CommandLineInput):
+    """Checks whether the type of the command line input is an issue"""
+    return command_line_input.type == "issue"
+
+
+def is_status_command(command_line_input: CommandLineInput):
+    """Checks whether the command line input is a status command"""
+    return isinstance(command_line_input.command, Status)

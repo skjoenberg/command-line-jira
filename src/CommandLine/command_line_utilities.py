@@ -27,4 +27,4 @@ def require_password_from_input() -> str:
 
 
 def get_command_line_arguments():
-    return sys.argv
+    return sys.argv[1:]
