@@ -1,6 +1,6 @@
 from jira import JIRA, Issue as JiraIssue
 
-from login_manager import LoginManager
+from LoginManagement.login_manager import LoginManager
 from CommandLine.command_line_utilities import write_to_console
 from typing import Optional
 

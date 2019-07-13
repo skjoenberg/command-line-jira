@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from jira_command_manager import JiraCommandManager
+from JiraInteractions.jira_command_manager import JiraCommandManager
 
 
 class Request(ABC):

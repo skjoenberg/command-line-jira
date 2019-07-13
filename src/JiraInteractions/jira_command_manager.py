@@ -1,8 +1,8 @@
-from JiraDataObjects.board import Board
-from JiraDataObjects.sprint import Sprint
+from JiraInteractions.JiraDataObjects.board import Board
+from JiraInteractions.JiraDataObjects.sprint import Sprint
 from Config.config_manager import ConfigManager
-from jira_connection_manager import JiraConnectionHandler
-from JiraDataObjects.issue import Issue
+from JiraInteractions.jira_connection_manager import JiraConnectionHandler
+from JiraInteractions.JiraDataObjects.issue import Issue
 from typing import Optional
 
 

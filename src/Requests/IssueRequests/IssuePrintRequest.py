@@ -1,6 +1,6 @@
 from Requests.request import Request
 from Requests.shared_request_checks import is_issue
-from jira_command_manager import JiraCommandManager
+from JiraInteractions.jira_command_manager import JiraCommandManager
 
 
 class IssuePrintRequest(Request):

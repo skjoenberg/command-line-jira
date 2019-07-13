@@ -2,18 +2,13 @@ from CommandLine.command_line_input import CommandLineInput
 from CommandLine.command_line_utilities import write_to_console
 from Requests.IssueRequests.IssuePrintRequest import IssuePrintRequest
 from Requests.IssueRequests.IssueStatusRequest import IssueStatusRequest
-from Config.config_manager import ConfigManager
-from jira_command_manager import JiraCommandManager
-from jira_connection_manager import JiraConnectionHandler
-from login_manager import LoginManager
+from JiraInteractions.jira_command_manager import JiraCommandManager
 
 
 class RequestController:
-    def __init__(self):
-        config_manager = ConfigManager()
-        login_handler = LoginManager(config_manager.get_username())
-        self._jch = JiraConnectionHandler(login_handler)
-        self._jcm = JiraCommandManager(config_manager, self._jch)
+    def __init__(self, jira_connection_handler: JiraCommandManager, jira_command_manager: JiraCommandManager):
+        self._jch = jira_connection_handler
+        self._jcm = jira_command_manager
         self._request_types = []
 
         self.initialize_request_types()

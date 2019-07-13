@@ -1,5 +1,5 @@
 from jira.resources import Sprint as JiraSprint
-from JiraDataObjects.board import Board
+from JiraInteractions.JiraDataObjects.board import Board
 
 
 class Sprint:

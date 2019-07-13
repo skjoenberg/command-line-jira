@@ -1,11 +1,13 @@
 import keyring
+
+from Config.config_manager import ConfigManager
 from constants import Constants
 from CommandLine.command_line_utilities import require_password_from_input
 
 
 class LoginManager:
-    def __init__(self, username: str):
-        self._username = username
+    def __init__(self, config_manager: ConfigManager):
+        self._username = config_manager.get_username()
         self._password = None
         self._resolve_password()
 
