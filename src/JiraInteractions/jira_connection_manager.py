@@ -1,5 +1,6 @@
 from jira import JIRA, Issue as JiraIssue
 
+from Config.config_manager import ConfigManager
 from LoginManagement.login_manager import LoginManager
 from CommandLine.command_line_utilities import write_to_console
 from typing import Optional
@@ -9,8 +10,9 @@ class JiraConnectionHandler:
     _jira_agile: Optional[JIRA]
     _loginHandler: LoginManager
 
-    def __init__(self, login_manager: LoginManager):
+    def __init__(self, login_manager: LoginManager, config_manager: ConfigManager):
         self._loginHandler = login_manager
+        self._server = config_manager.server
         self._jira_agile = None
         self._jira_greenhopper = None
 
@@ -38,28 +40,34 @@ class JiraConnectionHandler:
             )
 
     def _setup_connection_parameters(self):
-        server_url = "http://wip.schantz.com"
+        """Creates the parameters needed for establishing a connection to Jira"""
         auth = self._loginHandler.get_login_information()
-        agile_options = {"server": server_url, "agile_rest_path": 'agile'}
-        greenhopper_options = {"server": server_url}
+        agile_options = {"server": self._server, "agile_rest_path": 'agile'}
+        greenhopper_options = {"server": self._server}
         return {"basic_auth": auth, "options": agile_options}, {"basic_auth": auth, "options": greenhopper_options}
 
     def get_issue(self, issue_name) -> JiraIssue:
+        """Gets an issue based on an issue name"""
         return self._jira_agile.issue(issue_name)
 
     def get_project(self, project_name):
+        """Gets a project based on a project name"""
         return self._jira_agile.project(project_name)
 
     def assign_issue(self, issue_id: int, user: str) -> None:
+        """Assigns a user to an issue"""
         self._jira_agile.assign_issue(issue_id, user)
 
     def get_boards(self, board_name: str) -> [dict]:
+        """Gets a board based on a board name"""
         return self._jira_agile.boards(name=board_name)
 
     def get_sprints(self, board_id: int, state: Optional[str] = None) -> [dict]:
+        """Gets the sprints related to a board"""
         return self._jira_agile.sprints(board_id, state=state)
 
     def get_estimated_work_left_in_sprint(self, board_id: int, sprint_id: int) -> int:
+        """Gets the amount of work left in a sprint"""
         return self._jira_greenhopper.incompletedIssuesEstimateSum(board_id, sprint_id)
 
     def get_transitions(self, issue: JiraIssue):

@@ -60,8 +60,14 @@ class ConfigManager:
         except:
             pass
 
-    def get_username(self):
+    @property
+    def username(self):
         return self._config.username
 
-    def get_default_board(self):
+    @property
+    def default_board(self):
         return self._config.default_board
+
+    @property
+    def server(self):
+        return self._config.server

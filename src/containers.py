@@ -10,7 +10,7 @@ from LoginManagement.login_manager import LoginManager
 class Managers(containers.DeclarativeContainer):
     config_manager = providers.Singleton(ConfigManager)
     login_manager = providers.Singleton(LoginManager, config_manager)
-    jira_connection_handler = providers.Singleton(JiraConnectionHandler, login_manager)
+    jira_connection_handler = providers.Singleton(JiraConnectionHandler, login_manager, config_manager)
     jira_command_manager = providers.Singleton(JiraCommandManager, config_manager, jira_connection_handler)
 
 
