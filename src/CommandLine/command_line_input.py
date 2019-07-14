@@ -1,10 +1,10 @@
 import string
 
-from Commands import ICommand
+from Commands import icommand
 
 
 class CommandLineInput:
-    def __init__(self, type: string, id: string, command: ICommand):
+    def __init__(self, type: string, id: string, command: icommand):
         """Read-only dto for command line input"""
         self._id = id
         self._type = type

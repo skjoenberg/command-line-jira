@@ -3,8 +3,8 @@ from argparse import Namespace
 from pipe import Pipe
 
 from CommandLine.command_line_input import CommandLineInput
-from Commands import Status
-from Commands.LogWork import LogWork
+from Commands import status
+from Commands.log_work import LogWork
 
 
 @Pipe
@@ -16,7 +16,7 @@ def Map(args: Namespace) -> CommandLineInput:
 def create_command(args: Namespace):
     try:
         if args.status:
-            return Status
+            return status
     except:
         pass
 
@@ -26,5 +26,5 @@ def create_command(args: Namespace):
     except:
         pass
 
-    return Status
+    return status
 

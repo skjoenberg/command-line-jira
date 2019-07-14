@@ -1,5 +1,5 @@
 from CommandLine.command_line_input import CommandLineInput
-from Commands.Status import Status
+from Commands.status import Status
 
 
 def is_issue(command_line_input: CommandLineInput):

@@ -1,6 +1,6 @@
 from CommandLine.command_line_input import CommandLineInput
-from Requests.request import Request
-from Commands.LogWork import LogWork
+from Requests.IssueRequests.request import Request
+from Commands.log_work import LogWork
 from JiraInteractions.jira_command_manager import JiraCommandManager
 
 

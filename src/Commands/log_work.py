@@ -1,4 +1,4 @@
-from Commands.ICommand import ICommand
+from Commands.icommand import ICommand
 
 
 class LogWork(ICommand):

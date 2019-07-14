@@ -1,8 +1,8 @@
 from CommandLine.command_line_input import CommandLineInput
 from CommandLine.command_line_utilities import write_to_console
-from Requests.IssueRequests.IssuePrintRequest import IssuePrintRequest
-from Requests.IssueRequests.IssueStatusRequest import IssueStatusRequest
-from Requests.IssueRequests.IssueLogWorkRequest import IssueLogWorkRequest
+from Requests.IssueRequests.Issue_print_request import IssuePrintRequest
+from Requests.IssueRequests.Issue_status_request import IssueStatusRequest
+from Requests.IssueRequests.Issue_log_work_request import IssueLogWorkRequest
 from JiraInteractions.jira_command_manager import JiraCommandManager
 
 

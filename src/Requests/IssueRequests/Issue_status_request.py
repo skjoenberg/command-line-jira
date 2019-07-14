@@ -1,6 +1,6 @@
 from CommandLine.command_line_input import CommandLineInput
 from Requests.shared_request_checks import is_issue, is_status_command
-from Requests.request import Request
+from Requests.IssueRequests.request import Request
 from JiraInteractions.jira_command_manager import JiraCommandManager
 
 
