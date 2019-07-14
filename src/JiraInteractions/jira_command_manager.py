@@ -1,4 +1,5 @@
-from jira.client import ResultList
+import string
+
 from jira.resources import Board
 
 from JiraInteractions.JiraDataObjects.board import Board
@@ -23,6 +24,15 @@ class NameMatchesMultipleBoards(Exception):
     def __init__(self, boards):
         self.expression = boards
         self.message = "Multiple boards matches the name"
+
+
+class InvalidTransitionName(Exception):
+    """:exception caused by a trying to perform a non-existing transition on an issue"""
+
+    def __init__(self, transition_name: string, transitions: dict):
+        self.expression = transition_name
+        self.message = "Transition \"" + transition_name + "\" does not exist." \
+        "Possible transtions are: " + ", ".join(transitions.keys)
 
 
 def _validate_issue_name(issue_name) -> None:
@@ -72,8 +82,7 @@ class JiraCommandManager:
         return self._connection_handler.get_sprints(board.id)
 
     def get_transitions(self, issue: Issue):
-        """"""
-        #TODO: Find out what this does
+        """Gets the possible transitions"""
         return self._connection_handler.get_transitions(issue.issue)
 
     def get_active_sprint(self, board: Board):
@@ -87,3 +96,13 @@ class JiraCommandManager:
     def log_work(self, issue: Issue, minutes_spent: int) -> None:
         """Logs work on an issue"""
         self._connection_handler.log_work(self._config_manager.username, issue.issue, minutes_spent)
+
+    def move_issue(self, issue: Issue, transition_name: string) -> None:
+        """Moves an issue given a transition"""
+        transitions = self.get_transitions(issue)
+        for transition_dict in transitions:
+            if transition_dict["name"] == transition_name:
+                self._connection_handler.move_issue(issue.issue, transition_dict["id"])
+                return
+
+        raise InvalidTransitionName(transition_name, transitions)

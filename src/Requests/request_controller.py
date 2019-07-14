@@ -4,6 +4,7 @@ from Requests.IssueRequests.Issue_print_request import IssuePrintRequest
 from Requests.IssueRequests.Issue_status_request import IssueStatusRequest
 from Requests.IssueRequests.Issue_log_work_request import IssueLogWorkRequest
 from JiraInteractions.jira_command_manager import JiraCommandManager
+from Requests.IssueRequests.issue_move_request import IssueMoveRequest
 
 
 class RequestController:
@@ -17,6 +18,7 @@ class RequestController:
     def initialize_request_types(self):
         self._request_types.append(IssueStatusRequest())
         self._request_types.append(IssueLogWorkRequest())
+        self._request_types.append(IssueMoveRequest())
         self._request_types.append(IssuePrintRequest())
 
     def execute_request(self, command_line_input: CommandLineInput):

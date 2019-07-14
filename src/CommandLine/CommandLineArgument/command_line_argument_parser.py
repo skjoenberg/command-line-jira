@@ -8,7 +8,6 @@ from CommandLine.command_line_utilities import get_command_line_arguments
 
 def parse_arguments() -> Namespace:
     """Parses the arguments given in the command line"""
-
     return get_command_line_arguments() | _default_no_arguments_to_help | _parse_cmd_args
 
 
@@ -17,7 +16,6 @@ def _default_no_arguments_to_help(cmd_args: [string]) -> [string]:
     """Defaults zero arguments to the --help command"""
     if len(cmd_args) == 0:
         return ["-h"]
-
     return cmd_args
 
 
@@ -28,7 +26,6 @@ def _parse_cmd_args(cmd_args: [string]) -> Namespace:
 
 def _setup_argument_parser() -> ArgumentParser:
     """Creates the argument parser for Command Line Jira"""
-
     return argparse.ArgumentParser(description='Command line interface for JIRA.') | _add_jira_objects_subparsers
 
 
@@ -42,11 +39,11 @@ def _add_jira_objects_subparsers(parser: ArgumentParser) -> ArgumentParser:
 @Pipe
 def _add_issue_subparser(subparsers: _SubParsersAction) -> _SubParsersAction:
     """Creates a subparser for interacting with issues"""
-
     issue_parser = subparsers.add_parser("issue", aliases=['i'], help="Jira issue")
 
     issue_parser.add_argument('id', metavar='ID', help='Identifier of the object (Eg. ISSUE-189)')
-    issue_parser.add_subparsers(help="log_work") | _add_log_work_subparser
+
+    issue_parser.add_subparsers() | _add_log_work_subparser | _add_move_issue_subparser
 
     issue_parser.add_argument('-s', '--status', action='store_true', help='Gets the current status')
 
@@ -57,7 +54,7 @@ def _add_issue_subparser(subparsers: _SubParsersAction) -> _SubParsersAction:
 @Pipe
 def _add_log_work_subparser(subparsers: _SubParsersAction):
     """Creates a subparser for logging work"""
-    log_work_parser = subparsers.add_parser("log-work", aliases=["lw"], help="Log workz")
+    log_work_parser = subparsers.add_parser("log-work", aliases=["lw"], help="Logs work on an issue")
     log_work_parser.add_argument('minutes', metavar="MINUTES", help='Minutes of work to log')
 
     log_work_parser.set_defaults(log_work=True)
@@ -65,9 +62,19 @@ def _add_log_work_subparser(subparsers: _SubParsersAction):
 
 
 @Pipe
+def _add_move_issue_subparser(subparsers: _SubParsersAction):
+    """Creates a subparser for logging work"""
+    move_issue_parser = subparsers.add_parser("move", aliases=["mv"], help="Moves an issue from one status to another")
+    move_issue_parser.add_argument("transition", metavar="TRANSITION", help="The transition to perform on the issue")
+
+    move_issue_parser.set_defaults(move_issue=True)
+    return subparsers
+
+
+@Pipe
 def _add_board_subparser(subparsers: _SubParsersAction) -> _SubParsersAction:
     """Creates a subparser for interacting with boards"""
-
     board_parser = subparsers.add_parser("board", aliases=['b'], help="Jira board")
+
     board_parser.set_defaults(type='board')
     return subparsers

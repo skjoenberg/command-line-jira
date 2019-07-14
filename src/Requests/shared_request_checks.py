@@ -12,6 +12,3 @@ def is_status_command(command_line_input: CommandLineInput):
     return isinstance(command_line_input.command, Status)
 
 
-def is_status_command(command_line_input: CommandLineInput):
-    """Checks whether the command line input is a status command"""
-    return isinstance(command_line_input.command, Status)

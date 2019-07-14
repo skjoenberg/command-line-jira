@@ -73,7 +73,13 @@ class JiraConnectionHandler:
         return self._jira_greenhopper.incompletedIssuesEstimateSum(board_id, sprint_id)
 
     def get_transitions(self, issue: JiraIssue):
+        """Gets the possible transitions of an issue"""
         return self._jira_agile.transitions(issue)
 
-    def log_work(self, username: string, issue: JiraIssue, minutes_spent: int):
+    def log_work(self, username: string, issue: JiraIssue, minutes_spent: int) -> None:
+        """Logs work on an issue"""
         self._jira_agile.add_worklog(issue.key,timeSpent=str(minutes_spent) + "m", user=username)
+
+    def move_issue(self, issue: JiraIssue, transition: int):
+        """Moves an issue given a transition id"""
+        self._jira_agile.transition_issue(issue.key, transition)

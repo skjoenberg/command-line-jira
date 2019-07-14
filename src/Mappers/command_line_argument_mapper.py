@@ -1,10 +1,10 @@
-import string
 from argparse import Namespace
 from pipe import Pipe
 
 from CommandLine.command_line_input import CommandLineInput
-from Commands import status
+from Commands.status import Status
 from Commands.log_work import LogWork
+from Commands.move_issue import MoveIssue
 
 
 @Pipe
@@ -16,15 +16,22 @@ def Map(args: Namespace) -> CommandLineInput:
 def create_command(args: Namespace):
     try:
         if args.status:
-            return status
-    except:
+            return Status
+    except AttributeError:
         pass
 
     try:
         if args.log_work:
             return LogWork(args.minutes)
-    except:
+    except AttributeError:
         pass
 
-    return status
+    try:
+        if args.move_issue:
+            return MoveIssue(args.transition)
+    except AttributeError:
+        pass
+
+    # Default to status
+    return Status
 

@@ -45,8 +45,10 @@ class Issue:
 
         ba = colored(" \ ", 'blue')
         general_info_line = "{:80}".format(
-            ba.join([self.issue_type, ','.join(self.labels), 'Remaining: ' + str(self.remaining_estimate)]))
+            ba.join([self.issue_type, ','.join(self.labels), 'Remaining: {:3.0f}%'.format(self.remaining_estimate * 100)])) + "\n"
 
-        description_line = "\n".join([fill(line, width=80) for line in self.description.split("\n")])
+        description_line = "[No description]"
+        if self.description:
+            description_line = "\n".join([fill(line, width=80) for line in self.description.split("\n")])
 
-        return "\n".join([title_line, general_info_line, "\n", description_line])
+        return "\n".join([title_line, general_info_line, description_line])
