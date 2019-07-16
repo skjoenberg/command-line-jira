@@ -14,8 +14,8 @@ class Sprint:
 
     @property
     def id(self):
-        return self.id
+        return self._id
 
     @property
     def board(self):
-        return self.board
+        return self._board

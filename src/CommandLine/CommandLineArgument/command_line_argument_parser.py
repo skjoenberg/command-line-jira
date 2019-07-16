@@ -76,5 +76,20 @@ def _add_board_subparser(subparsers: _SubParsersAction) -> _SubParsersAction:
     """Creates a subparser for interacting with boards"""
     board_parser = subparsers.add_parser("board", aliases=['b'], help="Jira board")
 
+    board_parser.add_argument('id', metavar='ID', help="Identifier of the object (Eg. \"Scrum Board\")")
+
+    board_parser.add_argument("-si", "--show-issues", nargs="?", metavar="SPRINT", const="current",
+                              help="Shows the issues on the board in a given sprint (Default: Current sprint)")
+
     board_parser.set_defaults(type='board')
+    return subparsers
+
+
+@Pipe
+def _add_get_issues_in_sprint_subparser(subparsers: _SubParsersAction):
+    """Creates a subparser for logging work"""
+    get_issues_in_sprint_parser = subparsers.add_parser("issues", aliases=["i"], help="Prints the issues on the board")
+    get_issues_in_sprint_parser.add_argument("-si", "--show-issues", nargs="?", metavar="SPRINT", help="Specifies the sprint")
+
+    get_issues_in_sprint_parser.set_defaults(issues_in_sprint=True)
     return subparsers

@@ -40,15 +40,35 @@ class Issue:
         except:
             return None
 
+    @property
+    def name(self) -> string:
+        return self._issue.key
+
+    @property
+    def assignee(self) -> string:
+        try:
+            return self._issue.fields.assignee.displayName
+        except:
+            return "Not assigned"
+    @property
+    def remaining_time(self) -> string:
+        try:
+            return '{:2.2f} days'.format(self.remaining_estimate)
+        except:
+            return "No time estimate"
+
     def pprint(self):
         title_line = "{:80}".format(colored(self.summary + " [" + self.status + "]", 'green'))
 
         ba = colored(" \ ", 'blue')
         general_info_line = "{:80}".format(
-            ba.join([self.issue_type, ','.join(self.labels), 'Remaining: {:3.0f}%'.format(self.remaining_estimate * 100)])) + "\n"
+            ba.join([self.issue_type, ','.join(self.labels), 'Remaining: ' + self.remaining_time])) + "\n"
 
         description_line = "[No description]"
         if self.description:
             description_line = "\n".join([fill(line, width=80) for line in self.description.split("\n")])
 
         return "\n".join([title_line, general_info_line, description_line])
+
+    def pprint_oneline(self):
+        return self.name + " [" + self.assignee + "]: " + self.status + " (" + self.remaining_time + ")"

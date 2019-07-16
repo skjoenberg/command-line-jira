@@ -106,3 +106,6 @@ class JiraCommandManager:
                 return
 
         raise InvalidTransitionName(transition_name, transitions)
+
+    def get_issues_in_sprint(self, sprint: Sprint):
+        return self._connection_handler.get_issues_in_sprint(sprint)

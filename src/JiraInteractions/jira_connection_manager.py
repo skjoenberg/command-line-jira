@@ -1,8 +1,10 @@
 import string
 
 from jira import JIRA, Issue as JiraIssue
+from jira.resources import Sprint as JiraSprint
 
 from Config.config_manager import ConfigManager
+from JiraInteractions.JiraDataObjects.sprint import Sprint
 from LoginManagement.login_manager import LoginManager
 from CommandLine.command_line_utilities import write_to_console
 from typing import Optional
@@ -83,3 +85,8 @@ class JiraConnectionHandler:
     def move_issue(self, issue: JiraIssue, transition: int):
         """Moves an issue given a transition id"""
         self._jira_agile.transition_issue(issue.key, transition)
+
+    def get_issues_in_sprint(self, sprint: Sprint):
+        """"""
+        #return self._jira_agile.sprint_info(sprint.board.id, sprint.id)
+        return self._jira_agile.search_issues("Sprint = {:d}".format(sprint.id))#, startAt=sprint.id, maxResults=1)
