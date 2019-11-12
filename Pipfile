@@ -11,6 +11,7 @@ keyring = ">=19.0.1"
 termcolor = "*"
 jira = "*"
 http-parser = "*"
+dependency_injector = "*"
 
 [requires]
 python_version = "3.7"
